@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            background: #333;
+            padding: 0 20px;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li {
+            margin: 0 15px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 14px 0;
+            display: block;
+        }
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .nav-toggle span {
+            height: 3px;
+            width: 25px;
+            background: #fff;
+            margin: 5px 0;
+            border-radius: 2px;
+        }
+        @media (max-width: 600px) {
+            .nav-links {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+            }
+            .nav-links li {
+                margin: 0;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            nav:focus-within .nav-links,
+            nav:hover .nav-links {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav tabindex="0">
+        <div class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+    
+</body>
+</html>
