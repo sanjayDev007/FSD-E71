@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design with Media Queries</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { 
+            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; 
+            margin: 30px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        h1, h2, h3 { 
+            color: #1565c0; 
+            border-bottom: 2px solid #42a5f5;
+            padding-bottom: 5px;
+        }
+        h4 {
+            color: #1976d2;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .diagram { 
+            margin: 30px 0; 
+            text-align: center;
+        }
+        .diagram svg { 
+            background: #f8fbff; 
+            border-radius: 10px;
+            border: 1px solid #ccc; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .analogy {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .analogy-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 5px;
+        }
+        .code-example {
+            background: #f5f5f5;
+            border-left: 4px solid #42a5f5;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding: 15px;
+        }
+        .code-example code {
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .line-numbers .line-numbers-rows {
+            padding-top: 15px;
+            border-right: 1px solid #ddd;
+        }
+        pre[class*="language-"].line-numbers {
+            padding-left: 3.8em;
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        .elements-section { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .structure-section { background: #fff3e0; border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .semantic-section { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .attributes-section { background: #e1f5fe; border-left: 4px solid #03a9f4; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .comparison {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .comparison-box {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 280px;
+        }
+        .bad-example { background: #ffebee; border: 1px solid #ef9a9a; }
+        .good-example { background: #e8f5e9; border: 1px solid #a5d6a7; }
+        .mindblown {
+            background: #ffebee;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f44336;
+            text-align: center;
+        }
+        .step-by-step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #6c757d;
+        }
+        dl dt {
+            font-weight: bold;
+            color: #1565c0;
+        }
+        dl dd {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📱 Mastering Responsive Design with Media Queries! 🖥️</h1>
+    <p>Welcome, future web wizard! 🧙‍♂️ Today, we're diving into one of the most essential skills for modern web development: making websites that look amazing on any device. From a tiny phone to a giant desktop monitor, your pages will learn to adapt. This magic is called Responsive Web Design.</p>
+
+    <div class="container">
+        <h2>What is Responsive Design?</h2>
+        <p>Responsive Web Design (RWD) is an approach that makes your web pages render well on a variety of devices and window or screen sizes. The content and layout "respond" to the user's environment.</p>
+
+        <div class="analogy">
+            <div class="analogy-title">The "One-Size-Fits-All" Clothing Analogy</div>
+            <p>Imagine trying to sell a t-shirt that's only available in one size. It would be huge on a child and too small for a basketball player! Responsive design is like having a magical t-shirt that automatically shrinks or grows to fit whoever is wearing it perfectly. That's what we want for our websites!</p>
+        </div>
+        <p>The core tool we use to achieve this is the mighty <strong>Media Query</strong>.</p>
+    </div>
+
+    <div class="container">
+        <h2>The Key Ingredient: Media Queries 🔑</h2>
+        <p>Media queries are a feature of CSS3 that allow you to apply CSS styles only when certain conditions (or "features") about the device or browser are true. They are the "if statements" of CSS!</p>
+
+        <div class="step-by-step">
+            <h4>Breaking Down the Syntax</h4>
+            <p>A media query is composed of a media type and can, from there, have one or more expressions of media features.</p>
+            <pre class="code-example line-numbers"><code class="language-css">@media screen and (min-width: 900px) {
+  /* CSS rules go here */
+  body {
+    background-color: lightblue;
+  }
+}</code></pre>
+            <dl>
+                <dt><code class="highlight">@media</code></dt>
+                <dd>The at-rule that starts the media query block.</dd>
+                <dt><code class="highlight">screen</code></dt>
+                <dd>The media type. You're telling the browser these rules are for screens (as opposed to <code class="highlight">print</code> or <code class="highlight">speech</code>). You'll almost always use <code class="highlight">screen</code>.</dd>
+                <dt><code class="highlight">and</code></dt>
+                <dd>A keyword to chain together multiple conditions.</dd>
+                <dt><code class="highlight">(min-width: 900px)</code></dt>
+                <dd>The media feature and its value. This is the condition! This one checks if the viewport width is <strong>at least 900 pixels</strong>.</dd>
+            </dl>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>🛑 The Most Important First Step: The Viewport Meta Tag</h2>
+        <p>Before you write a single media query, you MUST include the viewport meta tag in the <code class="highlight">&lt;head&gt;</code> of your HTML. Without it, your media queries won't work correctly on mobile devices!</p>
+        
+        <div class="analogy">
+            <div class="analogy-title">The Magnifying Glass Analogy</div>
+            <p>Without the viewport tag, mobile browsers pretend to be a desktop browser and then shrink the result down to fit the small screen. It's like looking at a full-size newspaper through a magnifying glass—everything is tiny and unreadable! The viewport tag tells the browser, "Stop pretending! Act your real size."</p>
+        </div>
+
+        <div class="attributes-section">
+            <h4>The Magic Line of Code</h4>
+            <p>Place this inside your <code class="highlight">&lt;head&gt;</code> tag. Always. No exceptions!</p>
+            <pre class="code-example"><code class="language-markup">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+            <ul>
+                <li><code class="highlight">width=device-width</code>: Sets the width of the viewport to the width of the device's screen.</li>
+                <li><code class="highlight">initial-scale=1.0</code>: Sets the initial zoom level to 100% when the page is first loaded.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Mobile-First vs. Desktop-First Approach</h2>
+        <p>There are two main strategies for writing your media queries. The modern, recommended approach is "Mobile-First."</p>
+
+        <div class="comparison">
+            <div class="comparison-box good-example">
+                <h4>✅ Good: Mobile-First (using `min-width`)</h4>
+                <p>You start by writing the base CSS for mobile devices. Then, you use media queries with <code class="highlight">min-width</code> to add or override styles for larger screens. This is generally more efficient.</p>
+<pre class="code-example"><code class="language-css">/* Base styles for mobile */
+.container { width: 100%; }
+
+/* Tablet styles */
+@media (min-width: 768px) {
+  .container { width: 80%; }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .container { width: 60%; }
+}</code></pre>
+            </div>
+            <div class="comparison-box bad-example">
+                <h4>❌ Okay, but... Desktop-First (using `max-width`)</h4>
+                <p>Here, you write the base CSS for desktops and then use <code class="highlight">max-width</code> to change styles for smaller screens. This can lead to more complex CSS, as you often have to undo styles from the desktop layout.</p>
+<pre class="code-example"><code class="language-css">/* Base styles for desktop */
+.container { width: 60%; }
+
+/* Tablet styles */
+@media (max-width: 1023px) {
+  .container { width: 80%; }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .container { width: 100%; }
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Let's Build Something! A Practical Example</h2>
+        <p>Theory is great, but let's see it in action. We'll create a simple layout with three boxes. On mobile, they'll stack. On larger screens, they'll form a row.</p>
+        
+        <h4>The HTML Structure</h4>
+        <pre class="code-example line-numbers"><code class="language-markup">&lt;div class="card-container"&gt;
+  &lt;div class="card"&gt;Card 1&lt;/div&gt;
+  &lt;div class="card"&gt;Card 2&lt;/div&gt;
+  &lt;div class="card"&gt;Card 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+        <h4>The Mobile-First CSS</h4>
+        <p>Try resizing your browser window to see the layout change!</p>
+        <pre class="code-example line-numbers"><code class="language-css">/* Mobile-First Base Styles */
+.card-container {
+  display: flex;
+  flex-direction: column; /* Stack cards vertically by default */
+  gap: 1rem;
+}
+
+.card {
+  background-color: #42a5f5;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+/* Media Query for Tablets and larger */
+@media (min-width: 768px) {
+  .card-container {
+    flex-direction: row; /* Change to horizontal layout */
+    justify-content: space-between;
+  }
+
+  .card {
+    /* Each card takes up roughly a third of the space */
+    flex-basis: 32%; 
+  }
+}</code></pre>
+    </div>
+
+    <div class="mindblown">
+        <h3>💡 The "Aha!" Moment: Think in Layers!</h3>
+        <p>Responsive design isn't about creating completely different websites. It's about starting with a solid, universal foundation (mobile) and progressively enhancing the layout as more screen space becomes available. You're adding layers of complexity, not starting over each time!</p>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
