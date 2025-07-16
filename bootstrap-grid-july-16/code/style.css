@@ -1,0 +1,47 @@
+.box {
+    background-color: red;
+    margin: 20px auto;
+}
+body:before {
+    content: "XS";
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+    display: block;
+    text-align: center;
+    color: white;
+    background-color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: sans-serif;
+    font-size: 16px;
+    pointer-events: none;
+    margin: 0;
+}
+
+@media (min-width: 576px) {
+    body:before {
+        content: "SM";
+    }
+}
+@media (min-width: 768px) {
+    body:before {
+        content: "MD";
+    }
+}
+@media (min-width: 992px) {
+    body:before {
+        content: "LG";
+    }
+}
+@media (min-width: 1200px) {
+    body:before {
+        content: "XL";
+    }
+}
+@media (min-width: 1400px) {
+    body:before {
+        content: "XXL";
+    }
+}
