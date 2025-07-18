@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap 5: Navbars, Cards & Modals</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { 
+            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; 
+            margin: 0;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f0f8ff;
+            padding-top: 70px; /* Add padding to body to prevent content from hiding behind fixed navbar */
+        }
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 { 
+            color: #1565c0; 
+            border-bottom: 2px solid #42a5f5;
+            padding-bottom: 5px;
+        }
+        h4 {
+            color: #1976d2;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .analogy {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .analogy-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 5px;
+        }
+        .code-example {
+            background: #f5f5f5;
+            border-left: 4px solid #42a5f5;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding: 15px;
+        }
+        .code-example code {
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .line-numbers .line-numbers-rows {
+            padding-top: 15px;
+            border-right: 1px solid #ddd;
+        }
+        pre[class*="language-"].line-numbers {
+            padding-left: 3.8em;
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+        .mindblown {
+            background: #ffebee;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f44336;
+            text-align: center;
+        }
+        .step-by-step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #6c757d;
+        }
+        dl dt {
+            font-weight: bold;
+            color: #1565c0;
+        }
+        dl dd {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Section 1: The Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">🚀 ComponentCraft</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+        <h1>🧩 Mastering Bootstrap Components: Navbars, Cards & Modals!</h1>
+
+        <div class="container">
+            <h2>Your Website's GPS: The Navbar 🗺️</h2>
+            <p>
+                Every great website needs a great navigation bar. It's the main map that guides your users around. Bootstrap makes creating a powerful, responsive navbar incredibly simple. The one at the very top of this page is a live example!
+            </p>
+            <div class="step-by-step">
+                <h4>Key Navbar Classes:</h4>
+                <dl>
+                    <dt>.navbar</dt>
+                    <dd>The base class that turns a list into a navbar.</dd>
+                    <dt>.navbar-expand-lg</dt>
+                    <dd>This is crucial! It tells the navbar to be expanded (horizontal) on large screens and up, but collapse into a "hamburger" menu on medium screens and down.</dd>
+                    <dt>.navbar-dark & .bg-primary</dt>
+                    <dd>These are for styling. <code class="highlight">.navbar-dark</code> makes the text light-colored, and <code class="highlight">.bg-primary</code> gives it that nice blue background.</dd>
+                    <dt>.navbar-toggler</dt>
+                    <dd>This is the hamburger button that appears on small screens.</dd>
+                    <dt>data-bs-toggle="collapse" & data-bs-target="..."</dt>
+                    <dd>These JavaScript-powering attributes tell the toggler button which element to open and close.</dd>
+                </dl>
+            </div>
+            <pre class="code-example"><code class="language-html">&lt;!-- The code for the navbar at the top of this page --&gt;
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-primary"&gt;
+  &lt;div class="container-fluid"&gt;
+    &lt;a class="navbar-brand" href="#"&gt;🚀 ComponentCraft&lt;/a&gt;
+    &lt;!-- This button shows up on small screens --&gt;
+    &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+      &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;!-- This content collapses on small screens --&gt;
+    &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+      &lt;ul class="navbar-nav"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a class="nav-link" href="#"&gt;Features&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>Content Containers: Bootstrap Cards 🃏</h2>
+            <p>
+                Cards are fantastic, flexible containers for your content. They can hold anything from images and text to lists and buttons, and they look great.
+            </p>
+            <div class="analogy">
+                <div class="analogy-title">💡 Analogy: The Digital Business Card</div>
+                <div>
+                    Think of a Bootstrap Card like a modern business card. It has a defined shape and neatly organizes key pieces of information: a picture (logo), a name (title), a description (text), and a call to action (a button). It's a self-contained packet of information.
+                </div>
+            </div>
+            <h4>Let's build a profile card:</h4>
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card shadow-sm mb-4">
+                        <img src="https://placehold.co/600x400/2196f3/ffffff?text=Profile+Pic" class="card-img-top" alt="Placeholder image">
+                        <div class="card-body">
+                            <h5 class="card-title">Alex Doe</h5>
+                            <p class="card-text">Alex is a web developer who loves creating amazing user experiences with Bootstrap and other modern tools. Likes 🍕 and 🚀.</p>
+                            <a href="#" class="btn btn-primary">View Profile</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <pre class="code-example"><code class="language-html">&lt;div class="card"&gt;
+  &lt;img src="..." class="card-img-top" alt="..."&gt;
+  &lt;div class="card-body"&gt;
+    &lt;h5 class="card-title"&gt;Card title&lt;/h5&gt;
+    &lt;p class="card-text"&gt;Some quick example text to build on the card title.&lt;/p&gt;
+    &lt;a href="#" class="btn btn-primary"&gt;Go somewhere&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="container">
+            <h2>The "Hey, Look at Me!": Bootstrap Modals 팝업</h2>
+            <p>
+                A modal is a dialog box or popup window that is displayed on top of the current page. They are perfect for important notifications, login forms, or showing more details without leaving the page.
+            </p>
+            <h4>A modal has two parts: the trigger (a button) and the modal itself.</h4>
+            <div class="step-by-step">
+                <dl>
+                    <dt>The Trigger</dt>
+                    <dd>This is just a button with two special attributes: <code class="highlight">data-bs-toggle="modal"</code> and <code class="highlight">data-bs-target="#yourModalID"</code>. This tells Bootstrap to open the modal with the matching ID.</dd>
+                    <dt>The Modal</dt>
+                    <dd>This is the hidden content that will pop up. It's made of a <code class="highlight">.modal-dialog</code> and <code class="highlight">.modal-content</code>, which contains a header, body, and footer.</dd>
+                </dl>
+            </div>
+            
+            <!-- Live Modal Demo -->
+            <div class="text-center my-4">
+                <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Launch Demo Modal
+                </button>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal Title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    This is the content of the modal. You can put forms, text, images, or anything else in here!
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <pre class="code-example line-numbers"><code class="language-html">&lt;!-- 1. The Trigger Button --&gt;
+&lt;button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"&gt;
+  Launch modal
+&lt;/button&gt;
+
+&lt;!-- 2. The Modal Itself (often placed at the end of the body) --&gt;
+&lt;div class="modal fade" id="exampleModal" tabindex="-1" aria-hidden="true"&gt;
+  &lt;div class="modal-dialog"&gt;
+    &lt;div class="modal-content"&gt;
+      &lt;div class="modal-header"&gt;
+        &lt;h5 class="modal-title"&gt;Modal Title&lt;/h5&gt;
+        &lt;button type="button" class="btn-close" data-bs-dismiss="modal"&gt;&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div class="modal-body"&gt;
+        ...
+      &lt;/div&gt;
+      &lt;div class="modal-footer"&gt;
+        &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+        &lt;button type="button" class="btn btn-primary"&gt;Save changes&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <div class="mindblown">
+            <h3>🤯 AHA! The "Data Attributes are Magic" Moment! 🤯</h3>
+            <p>
+                Did you notice how we made a responsive navbar and a functional pop-up modal <strong>without writing a single line of JavaScript?</strong> That's the real magic of Bootstrap! It uses special HTML attributes (<code class="highlight">data-bs-*</code>) to hook into its pre-built JavaScript engine. By simply linking a button's <code class="highlight">data-bs-target</code> to an element's <code class="highlight">id</code>, you unlock powerful, interactive components instantly.
+            </p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+</body>
+</html>
