@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Data Types: Primitives & References 🧠</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <style>
+        body { 
+            font-family: 'Comic Sans MS', 'Segoe UI', sans-serif; 
+            margin: 30px;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f0f8ff;
+        }
+        h1, h2, h3 { 
+            color: #1565c0; 
+            border-bottom: 2px solid #42a5f5;
+            padding-bottom: 5px;
+        }
+        h4 {
+            color: #1976d2;
+        }
+        .container {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .diagram { 
+            margin: 30px 0; 
+            text-align: center;
+        }
+        .diagram svg { 
+            background: #f8fbff; 
+            border-radius: 10px;
+            border: 1px solid #ccc; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .analogy {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #2196f3;
+        }
+        .analogy-title {
+            font-weight: bold;
+            color: #0d47a1;
+            margin-bottom: 5px;
+        }
+        .code-example {
+            background: #f5f5f5;
+            border-left: 4px solid #42a5f5;
+            border-radius: 0 8px 8px 0;
+            margin: 15px 0;
+            overflow-x: auto;
+            padding: 15px;
+        }
+        .code-example code {
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 0.9em;
+            color: #333;
+        }
+        .line-numbers .line-numbers-rows {
+            padding-top: 15px;
+            border-right: 1px solid #ddd;
+        }
+        pre[class*="language-"].line-numbers {
+            padding-left: 3.8em;
+        }
+        .highlight {
+            background: #fff9c4;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+        .elements-section { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .structure-section { background: #fff3e0; border-left: 4px solid #ff9800; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .semantic-section { background: #f3e5f5; border-left: 4px solid #9c27b0; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .attributes-section { background: #e1f5fe; border-left: 4px solid #03a9f4; padding: 20px; border-radius: 8px; margin: 20px 0; }
+        .comparison {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .comparison-box {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 280px;
+        }
+        .bad-example { background: #e3f2fd; border: 1px solid #90caf9; }
+        .good-example { background: #fff3e0; border: 1px solid #ffcc80; }
+        .mindblown {
+            background: #ffebee;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #f44336;
+            text-align: center;
+        }
+        .step-by-step {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #6c757d;
+        }
+        dl dt {
+            font-weight: bold;
+            color: #1565c0;
+        }
+        dl dd {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>JavaScript Data Types: Primitives vs. References 🧠</h1>
+
+<div class="container">
+    <h2>What's a Data Type, Anyway?</h2>
+    <p>
+        In JavaScript, every piece of data you work with has a "type." It tells the JavaScript engine what kind of data it is and what you can do with it. You can't do math with a word, and you can't find the length of a number! Understanding data types is fundamental to writing correct and bug-free code.
+    </p>
+
+    <div class="analogy">
+        <div class="analogy-title">🛠️ Analogy: A Carpenter's Toolbox</div>
+        <p>
+            Think of data types like tools in a toolbox. You have hammers, screwdrivers, saws, and wrenches. You wouldn't use a hammer to turn a screw! Each tool has a specific purpose. Similarly, each data type (<code class="highlight">String</code>, <code class="highlight">Number</code>, <code class="highlight">Object</code>) has a specific role and set of capabilities in your code.
+        </p>
+    </div>
+    <p>JavaScript's data types can be split into two main categories: <strong>Primitive Types</strong> and <strong>Reference Types</strong>. Let's see what makes them different.</p>
+</div>
+
+<div class="container">
+    <h2>🧱 The Building Blocks: Primitive Types</h2>
+    <p>
+        Primitive types are the simplest, most basic data types. They are <strong>immutable</strong>, which is a fancy way of saying their values cannot be changed once created. When you work with a primitive, you work directly with its value.
+    </p>
+
+    <div class="elements-section">
+        <h4>The 7 Primitives</h4>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h4>String</h4>
+                <p>Textual data. Always wrapped in quotes.</p>
+                <pre class="code-example"><code class="language-javascript">const name = "Alice";</code></pre>
+            </div>
+            <div class="feature-card">
+                <h4>Number</h4>
+                <p>Both integers and floating-point numbers.</p>
+                <pre class="code-example"><code class="language-javascript">const age = 30;
+const price = 19.99;</code></pre>
+            </div>
+            <div class="feature-card">
+                <h4>Boolean</h4>
+                <p>Represents logical values: <code class="highlight">true</code> or <code class="highlight">false</code>.</p>
+                <pre class="code-example"><code class="language-javascript">const isLoggedIn = true;</code></pre>
+            </div>
+            <div class="feature-card">
+                <h4>null</h4>
+                <p>Represents the intentional absence of any object value.</p>
+                <pre class="code-example"><code class="language-javascript">let user = null;</code></pre>
+            </div>
+            <div class="feature-card">
+                <h4>undefined</h4>
+                <p>A variable that has been declared but not yet assigned a value.</p>
+                <pre class="code-example"><code class="language-javascript">let city; // city is undefined</code></pre>
+            </div>
+            <div class="feature-card">
+                <h4>BigInt</h4>
+                <p>For whole numbers larger than the standard <code class="highlight">Number</code> type can hold.</p>
+                <pre class="code-example"><code class="language-javascript">const hugeNumber = 9007...n;</code></pre>
+            </div>
+            <div class="feature-card">
+                <h4>Symbol</h4>
+                <p>A unique and immutable value, often used as an object property key.</p>
+                <pre class="code-example"><code class="language-javascript">const id = Symbol('id');</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>📚 The Blueprints: Reference Types (Objects)</h2>
+    <p>
+        Reference types are more complex. Unlike primitives, they are <strong>mutable</strong> (their contents can be changed). The most important thing to understand is that a variable assigned a reference type doesn't hold the actual data, but a <strong>reference (or a memory address)</strong> to where the data is stored.
+    </p>
+    <p>The main reference types are <code class="highlight">Object</code>, <code class="highlight">Array</code> (which is a special type of object), and <code class="highlight">Function</code>.</p>
+
+    <div class="analogy">
+        <div class="analogy-title">📜 Analogy: A Recipe vs. The Actual Cake</div>
+        <p>
+            A <strong>primitive value</strong> is like a small, finished cake. When you give it to someone, you're giving them the actual cake.
+        </p>
+        <p>
+            A <strong>reference value</strong> is like a recipe for a cake. The variable doesn't hold the cake itself, but the instructions (the memory address) on where to find and make the cake. If you give someone the recipe, you're both looking at the same set of instructions. If one person changes the recipe (e.g., adds more sugar), the other person will see that change too!
+        </p>
+    </div>
+</div>
+
+<div class="container">
+    <h2>The Big Difference: Value vs. Reference Explained</h2>
+    <p>This is the most crucial concept to grasp. How JavaScript copies these two types of data is completely different.</p>
+
+    <div class="comparison">
+        <div class="comparison-box bad-example">
+            <h4>➡️ Copied by Value (Primitives)</h4>
+            <p>When you copy a primitive, you get a brand new, independent copy of the value.</p>
+            <pre class="code-example line-numbers"><code class="language-javascript">let scoreA = 100;
+let scoreB = scoreA; // Copy the value
+
+console.log(scoreA); // 100
+console.log(scoreB); // 100
+
+// Now, let's change scoreB
+scoreB = 200;
+
+console.log(scoreA); // 100 (Unchanged!)
+console.log(scoreB); // 200</code></pre>
+        </div>
+        <div class="comparison-box good-example">
+            <h4>➡️ Copied by Reference (Objects)</h4>
+            <p>When you copy an object, you are only copying the memory address. Both variables point to the exact same object.</p>
+            <pre class="code-example line-numbers"><code class="language-javascript">const playerA = { name: 'Ryu', hp: 100 };
+const playerB = playerA; // Copy the reference
+
+console.log(playerA.hp); // 100
+console.log(playerB.hp); // 100
+
+// Now, let's change playerB's data
+playerB.hp = 50;
+
+console.log(playerA.hp); // 50 (It changed too!)
+console.log(playerB.hp); // 50</code></pre>
+        </div>
+    </div>
+
+    <h3>Visualizing Memory 🧠</h3>
+    <p>This diagram shows what's happening under the hood. The "Stack" is for static data (like variable names and primitive values). The "Heap" is for dynamic data (like objects and arrays).</p>
+    
+    <div class="diagram">
+        <!-- Diagram showing how primitives are stored by value and objects by reference -->
+        <svg width="600" height="400" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" font-family="Comic Sans MS, Segoe UI, sans-serif" font-size="14">
+            <rect x="1" y="1" width="598" height="398" fill="#f8fbff" stroke="#ccc" stroke-width="1"/>
+            
+            <!-- Stack Section -->
+            <text x="125" y="30" font-size="18" font-weight="bold" text-anchor="middle">STACK (Fast Memory)</text>
+            <rect x="25" y="40" width="200" height="340" fill="#e3f2fd" stroke="#90caf9" stroke-width="2" rx="8"/>
+            
+            <!-- Primitive Variable in Stack -->
+            <text x="50" y="70">let scoreA = 100;</text>
+            <rect x="50" y="80" width="150" height="40" fill="#fff" stroke="#42a5f5" stroke-width="1" rx="4"/>
+            <text x="60" y="105">scoreA: 100</text>
+            
+            <!-- Reference Variable in Stack -->
+            <text x="50" y="170">const playerA = { ... };</text>
+            <rect x="50" y="180" width="150" height="40" fill="#fff" stroke="#ff9800" stroke-width="1" rx="4"/>
+            <text x="60" y="205">playerA: @0x123</text>
+            
+            <!-- Heap Section -->
+            <text x="450" y="30" font-size="18" font-weight="bold" text-anchor="middle">HEAP (Slower, Dynamic Memory)</text>
+            <rect x="350" y="40" width="200" height="340" fill="#fff3e0" stroke="#ffcc80" stroke-width="2" rx="8"/>
+            
+            <!-- Object in Heap -->
+            <text x="375" y="170">Memory Address @0x123</text>
+            <rect x="375" y="180" width="150" height="60" fill="#fff" stroke="#ff9800" stroke-width="1" rx="4"/>
+            <text x="385" y="205">name: 'Ryu'</text>
+            <text x="385" y="225">hp: 100</text>
+            
+            <!-- Arrow from Stack to Heap -->
+            <path d="M 200 200 Q 275 200 370 205" stroke="#ff9800" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+            <defs>
+                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#ff9800"/>
+                </marker>
+            </defs>
+            
+            <text x="250" y="280" font-style="italic" fill="#555">Primitive value is stored directly in the variable.</text>
+            <text x="250" y="320" font-style="italic" fill="#555">Reference variable stores an ADDRESS (a pointer)</text>
+            <text x="250" y="340" font-style="italic" fill="#555">pointing to the object's location in the Heap.</text>
+        </svg>
+    </div>
+</div>
+
+<div class="container">
+    <div class="mindblown">
+        <h3>🤯 The Ultimate "Aha!" Moment</h3>
+        <p>
+            <strong>Primitives are the actual data. References are just pointers to the data.</strong><br>
+            When you copy a primitive, you duplicate the data. When you copy a reference, you just duplicate the pointer, but both pointers still lead to the one, original piece of data. Understanding this will save you from countless headaches!
+        </p>
+    </div>
+</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
