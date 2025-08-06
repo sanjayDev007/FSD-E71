@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Welcomr to stone, paper scissors</h2>
+    <script>
+        let score = 0;
+        let choices = ["stone", "paper", "scissors"];
+        let winningHash = {
+            "stone": ["scissors"],
+            "paper": ["stone"],
+            "scissors": ["paper"]
+        }
+        while (score < 10) {
+            let playerChoice = prompt("Enter your choice (stone, paper, scissors):");
+            let computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+            if (winningHash[playerChoice].includes(computerChoice)) {
+                alert(`You win! ${playerChoice} beats ${computerChoice}`);
+                score++;
+            } else if (winningHash[computerChoice].includes(playerChoice)) {
+                alert(`You lose! ${computerChoice} beats ${playerChoice}`);4
+                
+            } else {
+                alert("It's a tie!");
+            }
+        }
+
+    </script>
+</body>
+</html>
