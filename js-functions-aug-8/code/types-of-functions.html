@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1
+        //funtion with arguments and without return value
+        function greet(name, age) {
+            console.log(`Hello, my name is ${name} and I am ${age} years old.`);
+        }
+        //calling the function
+        greet("Alice", 30);
+
+
+        //2
+        //function with arguments and with return value
+        function add(a, b) {
+            return a + b;
+        }
+        //calling the function and storing the result
+        const sum = add(5, 10);
+
+        //3
+        //function without arguments and without return value  
+        function sayHello() {
+            console.log("Hello, World!");
+        }
+        //calling the function
+        sayHello();
+
+        //4
+        //function without arguments and with return value
+        function getCurrentYear() {
+            return new Date().getFullYear();
+        }
+        //calling the function and storing the result
+        const currentYear = getCurrentYear();
+        console.log(`The current year is ${currentYear}.`);
+
+    </script>
+</body>
+</html>
