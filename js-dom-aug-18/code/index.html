@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #154D71 0%, #1C6EA4 100%);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            color: #FFF9AF;
+            margin-top: 40px;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        p {
+            text-align: center;
+            color: #FFF9AF;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        #guessInput {
+            display: block;
+            margin: 0 auto 20px auto;
+            padding: 12px 18px;
+            font-size: 1.1rem;
+            border: 2px solid #33A1E0;
+            border-radius: 8px;
+            outline: none;
+            transition: border-color 0.3s;
+            width: 220px;
+            box-sizing: border-box;
+            background: #FFF9AF;
+            color: #154D71;
+        }
+
+        #guessInput:focus {
+            border-color: #1C6EA4;
+        }
+
+        #submitGuess {
+            display: block;
+            margin: 0 auto 25px auto;
+            padding: 12px 28px;
+            background: linear-gradient(90deg, #33A1E0 0%, #1C6EA4 100%);
+            color: #FFF9AF;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(21, 77, 113, 0.15);
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        #submitGuess:hover {
+            background: linear-gradient(90deg, #1C6EA4 0%, #33A1E0 100%);
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        #result {
+            text-align: center;
+            font-size: 1.3rem;
+            margin-top: 20px;
+            color: #ffffff;
+            min-height: 40px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome To Guess the Number</h1>
+    <p>Guess a number between 1 and 10</p>
+    <input type="number" id="guessInput" placeholder="Enter your guess">
+    <button id="submitGuess" onclick="submitGuess()">Submit Guess</button>
+    <div id="result"></div>
+    <script>
+        const guessInput = document.getElementById('guessInput');
+        const resultDiv = document.getElementById('result');
+        function getRandomNumber(start = 1, end = 100) {
+            return Math.floor(Math.random() * (end - start + 1)) + start;
+        }
+        let attempts = 0;
+        let randomNumber = getRandomNumber();
+        console.log("Random Number (for testing):", randomNumber);
+
+        function submitGuess() {
+            attempts++;
+            const userGuess = parseInt(guessInput.value);
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                resultDiv.textContent = "Please enter a valid number between 1 and 100.";
+                return;
+            }
+            if (userGuess === randomNumber) {
+                resultDiv.textContent = "Congratulations! You guessed the number! Attempts: "+  attempts;
+                randomNumber = getRandomNumber();
+                guessInput.value = '';
+            } else if (Math.abs(userGuess - randomNumber) <= 10) {
+                resultDiv.textContent = "Close!";
+            } else if (userGuess < randomNumber) {
+                resultDiv.textContent = "Too low! Try again.";
+            } else {
+                resultDiv.textContent = "Too high! Try again.";
+            }
+        }
+    </script>
+</body>
+
+</html>
