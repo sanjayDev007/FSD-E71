@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Listners</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: rgb(175, 175, 175);
+        }
+        img {
+            width: 400px;
+            height: 400px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h1 {
+            color: #ffffff;
+        }
+        #dice-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        #result-container {
+            margin-top: 20px;
+        }
+        .dice-card {
+           color: #ffffff;
+           display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Dice Game</h1>
+        <div id="dice-container">
+            <div class="dice-card">
+                <h2>Bot's Dice</h2>
+                <p id="bot-score">Score: 0</p>
+                <img id="bot-img" src="./images/1.png" alt="">
+            </div>
+            <div class="dice-card">
+                <h2>Your Dice</h2>
+                <p id="player-score">Score: 0</p>
+                <img id="player-img" src="./images/1.png" alt="">
+            </div>
+        </div>
+        <div id="result-container">
+            <h2 id="result-text">Click "Roll Dice" to start!</h2>
+
+            <button id="roll-button">Roll Dice</button>
+            <button id="reset-button">Reset Game</button>
+        </div>
+    </div>
+    <script>
+        const rollButton = document.getElementById('roll-button');
+        const resetButton = document.getElementById('reset-button');
+        const botScoreText = document.getElementById('bot-score');
+        const playerScoreText = document.getElementById('player-score');
+        const botImage = document.getElementById('bot-img');
+        const playerImage = document.getElementById('player-img');
+        const resultText = document.getElementById('result-text');
+
+        let botScore = 0;
+        let playerScore = 0;
+
+        function rollDice() {
+             const botRoll = Math.floor(Math.random() * 6) + 1;// Random number between 1 and 6
+             const playerRoll = Math.floor(Math.random() * 6) + 1; // Random number between 1 and 6
+
+             botImage.src = `./images/${botRoll}.png`;
+             playerImage.src = `./images/${playerRoll}.png`;
+
+             botScore = botScore + botRoll; // Update bot score
+             playerScore = playerScore + playerRoll; // Update player score
+
+            botScoreText.textContent = `Score: ${botScore}`;
+             playerScoreText.textContent = `Score: ${playerScore}`;
+
+            if (botScore >= 20 && botScore > playerScore) {
+                resultText.textContent = "Bot wins!";
+                rollButton.disabled = true;
+            } else if (playerScore >= 20 && playerScore > botScore) {
+                resultText.textContent = "You win!";
+                rollButton.disabled = true;
+            } else {
+                resultText.textContent = "Keep rolling!";
+            }
+         }
+
+        function resetGame() {
+            botScore = 0;
+            playerScore = 0;
+            botImage.src = './images/1.png';
+            playerImage.src = './images/1.png';
+            botScoreText.textContent = 'Score: 0';
+            playerScoreText.textContent = 'Score: 0';
+            resultText.textContent = 'Click "Roll Dice" to start!';
+            rollButton.disabled = false;
+        }
+
+         rollButton.addEventListener('click', rollDice);
+        resetButton.addEventListener('click', resetGame);
+    </script>
+</body>
+</html>
+
