@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        #sampleData {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>API </h1>
+        <p>This is a simple API documentation page.</p>
+        <div id="sampleData"></div>
+    </div>
+    <script>
+        const sampleData = document.getElementById('sampleData');
+       fetch('https://fakestoreapi.com/products')
+            .then(res=>res.json())            
+            .then(json=>{
+                json.forEach(product => {
+                    sampleData.innerHTML += `
+                    <div class="product">
+                        <h2>${product.title}</h2>
+                        <p>${product.description}</p>
+                    <p>Price: $${product.price}</p>
+                    <img src="${product.image}" alt="${product.title}" />
+                </div>
+                `;
+                });
+            })
+    </script>
+</body>
+</html>
