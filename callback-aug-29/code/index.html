@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // developer by bunji -> I mean browser developers
+        const customFetch = (url, callback) => {
+            let error = null;
+            let result = {
+                 newUrl: "https://api.example.com/data"+Math.random(),
+            }
+           if (!url) {
+                error = new Error("Invalid URL");
+           }
+           setTimeout(() => { // like data fetching
+               callback(error, result);
+           }, 10000);
+        }
+
+        // developer by us
+        console.log("1");
+        customFetch("https://api.example.com/data", (error, result) => {
+            if (error) {
+                console.error(error);
+            } else {
+                customFetch(result.newUrl, (error, result) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        customFetch(result.newUrl, (error, result) => {
+                            if (error) {
+                                console.error(error);
+                            } else {
+                                customFetch(result.newUrl, (error, result) => {
+                                    if (error) {
+                                        console.error(error);
+                                    } else {
+                                        console.log(result);
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            console.log("2");
+        });
+        console.log("3");
+    </script>
+</body>
+</html>
