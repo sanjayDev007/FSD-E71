@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <script>
+        
+        // function hello(value,callback) {
+        //     if (value) {
+        //         let sum = 10 + value;
+        //         callback(sum, null);
+        //     } else {
+        //         callback(null, "Invalid value");
+        //     }
+        // }
+
+
+        // hello(20,function(result, error) {
+        //     if (error) {
+        //         console.log(error);
+        //     } else {
+        //         console.log(result);
+        //     }
+        // });
+    
+        
+        //Promise
+
+        function isFalsy(value) {
+          if (value === 0 ) {
+            return false;
+          } else if (value == false || value == undefined || value == null || value == "" || Number.isNaN(value)) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+
+        function hello(value) {
+            return new Promise(function(resolve, reject) {
+                if (!isFalsy(value)) {
+                    let sum = value + 10;
+                    resolve(sum)
+                } else {
+                    reject("Invalid value")
+                }
+            })
+        }
+
+        // hello(undefined).then(function (result) {
+        //     console.log(result)
+        // }).catch(function (error) {
+        //     console.log(error)
+        // })
+
+        (async function () {
+            try {
+                const result = await hello(20);
+                console.log(result);
+            } catch (error) {
+                console.log(error);
+            }
+        })()
+    </script>
+</body>
+</html>
