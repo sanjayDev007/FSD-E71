@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+ 
+        function addEventListener(name, callback) {// name - > string , callback -> function
+            console.log(typeof callback);
+            console.log('Hello ' + name);
+            callback   // browser -> JS engine -> V8 engine -> C++ -> OS("I am callback function" );
+        }
+
+
+        
+        // dev calling the function
+        
+        addEventListener('click', function (value) { // data type -> function
+            console.log(value);
+        });
+   </script> 
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Enter a new todo" required>
+            <button type="button" id="todo-add">Add Todo</button>
+        </form>
+        <ul id="todo-list">
+            <!-- Todo items will appear here -->
+        </ul>
+    </div>
+    <script>
+        let todoForm = document.getElementById('todo-form');
+        let todoInput = document.getElementById('todo-input');
+        let todoList = document.getElementById('todo-list');
+        let addButton = document.getElementById('todo-add');
+        let deleteButton = document.querySelectorAll('.delete-btn');
+
+        function addTodo() {
+            let todoText = todoInput.value;
+            if (todoText !== '') {
+                let html = `
+                <li ><span>${todoText}</span><button class="delete-btn">Delete</button></li>
+                `;
+                todoList.insertAdjacentHTML('beforeend', html);
+                todoInput.value = '';
+            }
+        }
+        addButton.addEventListener('click', addTodo);
+        todoList.addEventListener('click', function(e) {
+            if (e.target.classList.contains('delete-btn')) {
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>
