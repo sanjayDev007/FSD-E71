@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Contact Form</h1>
+    <div id="contacts"></div>
+    <form action="">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <br>
+        <button type="button" id="add-contact">Add Contact</button>
+    </form>
+    <script>
+        const contactsDiv = document.getElementById('contacts');
+        const addContactButton = document.getElementById('add-contact');
+        async function fetchContacts() {
+            try {
+                const response = await fetch('http://localhost:3000/contacts');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+                const contacts = await response.json();
+                displayContacts(contacts);
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+                contactsDiv.innerHTML = '<p>Failed to load contacts.</p>';
+            }
+        }
+
+        function displayContacts(contacts) {
+            if (contacts.length === 0) {
+                contactsDiv.innerHTML = '<p>No contacts found.</p>';
+                return;
+            }
+
+            const ul = document.createElement('ul');
+            contacts.forEach(contact => {
+                const li = document.createElement('li');
+                li.textContent = `${contact.name} - ${contact.phone}`;
+            const editButton = document.createElement('button');
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+                const newName = prompt('Enter new name:', contact.name);
+                const newPhone = prompt('Enter new phone:', contact.phone);
+                if (newName && newPhone) {
+                    fetch(`http://localhost:3000/contacts/${contact.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ name: newName, phone: newPhone })
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        contactsDiv.innerHTML = '';
+                        fetchContacts();
+                    })
+                    .catch(error => {
+                        console.error('There has been a problem with your fetch operation:', error);
+                        alert('Failed to update contact.');
+                    });
+                }
+            });
+                li.appendChild(editButton);
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', async () => {
+                    try {
+                        const response = await fetch(`http://localhost:3000/contacts/${contact.id}`, {
+                            method: 'DELETE'
+                        });
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok ' + response.statusText);
+                        }
+                        contactsDiv.innerHTML = '';
+                        fetchContacts();
+                    } catch (error) {
+                        console.error('There has been a problem with your fetch operation:', error);
+                        alert('Failed to delete contact.');
+                    }
+                });
+                li.appendChild(deleteButton);
+                ul.appendChild(li);
+            });
+
+                
+            contactsDiv.appendChild(ul);
+        }
+        
+        
+        addContactButton.addEventListener('click', async () => {
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            if (name === '' || phone === '') {
+                alert('Please fill in both fields.');
+                return;
+            }
+
+            const newContact = { name, phone };
+
+            try {
+                const response = await fetch('http://localhost:3000/contacts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newContact)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                // Clear the input fields
+                nameInput.value = '';
+                phoneInput.value = '';
+
+                // Refresh the contact list
+                contactsDiv.innerHTML = '';
+                fetchContacts();
+            } catch (error) {
+                console.error('There has been a problem with your fetch operation:', error);
+                alert('Failed to add contact.');
+            }
+        });
+        
+        
+        document.addEventListener('DOMContentLoaded', fetchContacts);
+
+    </script>
+</body>
+</html>

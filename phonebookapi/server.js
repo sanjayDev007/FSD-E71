@@ -40,6 +40,9 @@ function parseBody(req, callback) {
 const server = http.createServer((req, res) => {
 	const url = new URL(req.url, `http://${req.headers.host}`);
 	const method = req.method;
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
 	// CORS preflight
 	if (method === 'OPTIONS') {
@@ -49,6 +52,19 @@ const server = http.createServer((req, res) => {
 			'Access-Control-Allow-Headers': 'Content-Type',
 		});
 		res.end();
+		return;
+	}
+
+	// GET /
+	if (url.pathname === '/' && method === 'GET') {
+		const indexPath = path.join(__dirname, 'index.html');
+		if (fs.existsSync(indexPath)) {
+			const html = fs.readFileSync(indexPath, 'utf8');
+			res.writeHead(200, { 'Content-Type': 'text/html' });
+			res.end(html);
+		} else {
+			sendJson(res, 404, { error: 'File not found' });
+		}
 		return;
 	}
 
@@ -64,6 +80,19 @@ const server = http.createServer((req, res) => {
 			);
 		}
 		sendJson(res, 200, contacts);
+		return;
+	}
+
+	// GET /contacts/:id
+	if (url.pathname.startsWith('/contacts/') && method === 'GET') {
+		const id = url.pathname.split('/')[2];
+		const contacts = readContacts();
+		const contact = contacts.find(c => c.id === id);
+		if (!contact) {
+			sendJson(res, 404, { error: 'Contact not found' });
+			return;
+		}
+		sendJson(res, 200, contact);
 		return;
 	}
 

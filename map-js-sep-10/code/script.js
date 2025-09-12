@@ -36,11 +36,11 @@
 
 function sum(...args) {
     console.log(args);
-    let result = 0;
+    let result = "";
     for (let i = 0; i < args.length; i++) {
         result += args[i];
     }
     console.log(result);
 }
 
-sum(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+sum("hello ", " world");
