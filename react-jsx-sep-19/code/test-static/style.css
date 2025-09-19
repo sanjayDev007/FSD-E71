@@ -1,0 +1,23 @@
+
+.card {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+  font-family: sans-serif;
+}
+.card-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.card-name {
+  margin: 10px 0;
+  color: #333;
+}
+.card-title {
+  color: #777;
+}
