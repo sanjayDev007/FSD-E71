@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS useState with MutationObserver</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Counter: <span id="counter">0</span></h1>
+        <button id="increment" onclick="setCount(count() + 1);">Increment</button>
+    </div>
+
+    <script>
+        // Simple useState implementation using Proxy for reactivity
+        function useState(initialValue) {
+            let value = initialValue;
+            const observers = [];
+
+            const proxy = new Proxy({ value }, {
+                set(target, prop, newValue) {
+                    if (prop === 'value') {
+                        target[prop] = newValue;
+                        // Notify observers (DOM updaters)
+                        observers.forEach(callback => callback(newValue));
+                    }
+                    return true;
+                }
+            });
+
+            const setValue = (newValue) => {
+                proxy.value = newValue;
+            };
+
+            const subscribe = (callback) => {
+                observers.push(callback);
+            };
+
+            return [() => proxy.value, setValue, subscribe];
+        }
+
+        // Usage
+        const [count, setCount, subscribeCount] = useState(0);
+
+        // Subscribe to updates and update DOM
+        subscribeCount((newValue) => {
+            document.getElementById('counter').textContent = newValue;
+        });
+
+        // Use MutationObserver to observe DOM changes (for demonstration, though not strictly necessary here)
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'childList' && mutation.target.id === 'counter') {
+                    console.log('DOM updated via MutationObserver:', mutation.target.textContent);
+                }
+            });
+        });
+
+        observer.observe(document.getElementById('counter'), { childList: true });
+
+    </script>
+</body>
+</html>
