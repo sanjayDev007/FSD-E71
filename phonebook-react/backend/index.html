@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phonebook App</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    h1 { color: #333; }
+    form, .search { margin-bottom: 1em; }
+    input, button { padding: 0.5em; margin-right: 0.5em; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ccc; padding: 0.5em; text-align: left; }
+    th { background: #f0f0f0; }
+    tr:nth-child(even) { background: #fafafa; }
+    .actions button { margin-right: 0.3em; }
+  </style>
+</head>
+<body>
+  <h1>Phonebook</h1>
+
+  <div class="search">
+    <input type="text" id="search" placeholder="Search by name or phone">
+    <button onclick="loadContacts()">Search</button>
+    <button onclick="resetSearch()">Reset</button>
+  </div>
+
+  <form id="addForm" onsubmit="addContact(event)">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="phone" placeholder="Phone" required>
+    <button type="submit">Add Contact</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Name</th><th>Phone</th><th>Actions</th></tr>
+    </thead>
+    <tbody id="contacts"></tbody>
+  </table>
+
+  <script>
+    const API = 'http://localhost:3000/contacts';
+    let editingId = null;
+
+    function loadContacts() {
+      const search = document.getElementById('search').value.trim();
+      let url = API;
+      if (search) url += '?search=' + encodeURIComponent(search);
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          const tbody = document.getElementById('contacts');
+          tbody.innerHTML = '';
+          data.forEach(c => {
+            tbody.innerHTML += `<tr>
+              <td>${editingId === c.id ? `<input id='editName' value='${c.name}'>` : c.name}</td>
+              <td>${editingId === c.id ? `<input id='editPhone' value='${c.phone}'>` : c.phone}</td>
+              <td class='actions'>
+                ${editingId === c.id ?
+                  `<button onclick="saveEdit('${c.id}')">Save</button><button onclick="cancelEdit()">Cancel</button>` :
+                  `<button onclick="startEdit('${c.id}','${c.name}','${c.phone}')">Edit</button><button onclick="deleteContact('${c.id}')">Delete</button>`}
+              </td>
+            </tr>`;
+          });
+        });
+    }
+
+    function addContact(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      fetch(API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone })
+      })
+      .then(r => r.json())
+      .then(() => {
+        document.getElementById('addForm').reset();
+        loadContacts();
+      });
+    }
+
+    function deleteContact(id) {
+      if (!confirm('Delete this contact?')) return;
+      fetch(API + '/' + id, { method: 'DELETE' })
+        .then(r => r.json())
+        .then(loadContacts);
+    }
+
+    function startEdit(id, name, phone) {
+      editingId = id;
+      loadContacts();
+    }
+
+    function saveEdit(id) {
+      const name = document.getElementById('editName').value.trim();
+      const phone = document.getElementById('editPhone').value.trim();
+      fetch(API + '/' + id, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone })
+      })
+      .then(r => r.json())
+      .then(() => {
+        editingId = null;
+        loadContacts();
+      });
+    }
+
+    function cancelEdit() {
+      editingId = null;
+      loadContacts();
+    }
+
+    function resetSearch() {
+      document.getElementById('search').value = '';
+      loadContacts();
+    }
+
+    // Initial load
+    loadContacts();
+  </script>
+</body>
+</html>
