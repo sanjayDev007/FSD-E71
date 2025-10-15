@@ -4,8 +4,7 @@ function ComC() {
   return (
     <>
     Component C
-    <br />
-    <ComD/>
+    <ComD />
     </>
   )
 }

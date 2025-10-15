@@ -6,7 +6,7 @@ function ComB() {
  <>
     Component B
     <br />
-    <ComC/>
+    <ComC />
     </>
   )
 }
