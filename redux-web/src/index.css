@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+:root{
+  --brand-font: Georgia, 'Times New Roman', serif;
+}
+
+body { font-family: var(--brand-font); }
