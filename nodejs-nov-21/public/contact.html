@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Canvas</title>
+    <meta name="description" content="Contact page - Send us a message" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">Canvas</a>
+        <nav class="main-nav" aria-label="Primary">
+          <button id="menu-toggle" class="menu-toggle" aria-expanded="false" aria-controls="primary-menu">☰</button>
+          <ul id="primary-menu" class="menu">
+            <li><a href="/features">Features</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a class="cta" href="/contact">Get Started</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-content">
+            <h1 class="hero-title">Contact us</h1>
+            <p class="hero-sub">We'd love to hear about your project or help with a question.</p>
+            <div class="hero-ctas">
+              <a class="btn primary" href="/">Back to Home</a>
+            </div>
+          </div>
+          <div class="hero-visuals" aria-hidden="true">
+            <svg class="visual" viewBox="0 0 600 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#6C5CE7" />
+                  <stop offset="100%" stop-color="#00B4D8" />
+                </linearGradient>
+              </defs>
+              <rect width="600" height="400" rx="24" fill="url(#g1)" opacity="0.18" />
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact">
+        <div class="container">
+          <h2 class="section-title">Get in touch</h2>
+          <p class="section-sub">Send us a message and we'll reply as soon as we can.</p>
+          <form class="contact-form" action="#" onsubmit="return handleForm(event)">
+            <div class="fields">
+              <input type="text" id="name" name="name" placeholder="Your name" required />
+              <input type="email" id="email" name="email" placeholder="Your email" required />
+            </div>
+            <textarea id="message" name="message" rows="4" placeholder="Message" required></textarea>
+            <div class="actions">
+              <button class="btn primary" type="submit">Send message</button>
+              <span id="msg-status" class="status" aria-live="polite"></span>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div>© <span id="year"></span> Canvas — Built with heart</div>
+        <div class="socials"><a href="#" aria-label="twitter">Twitter</a> <a href="#" aria-label="github">GitHub</a></div>
+      </div>
+    </footer>
+
+    <script>
+      // Small JS for menu toggle and form handler
+      const menuToggle = document.getElementById('menu-toggle');
+      const primaryMenu = document.getElementById('primary-menu');
+      menuToggle.addEventListener('click', () => {
+        const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+        menuToggle.setAttribute('aria-expanded', String(!expanded));
+        primaryMenu.classList.toggle('open');
+      });
+
+      function handleForm(e) {
+        e.preventDefault();
+        const name = document.getElementById('name');
+        const status = document.getElementById('msg-status');
+        status.textContent = 'Sending...';
+        setTimeout(() => {
+          status.textContent = `Thanks, ${name.value || 'friend'} — we received your message!`;
+          e.target.reset();
+        }, 800);
+        return false;
+      }
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
