@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p><%= description %></p>
+    <div class="items">
+      <% items.forEach(function(item) { %>
+        <div><%= item %></div>
+      <% }); %>
+    </div>
+    <div class="num">
+      <% if (num % 2 === 0) { %>
+        <%= num %> is even
+      <% } else { %>
+        <%= num %> is odd
+      <% } %>
+    </div>
+  </body>
+  <script>
+    // let items = ["apple", "banana", "cherry"];
+    // items.forEach((item) => {
+    //   let div = document.createElement("div");
+    //   div.textContent = item;
+    //   document.querySelector(".items").appendChild(div);
+    // });
+    // let num = 10;
+    // if (num % 2 === 0) {
+    //   document.querySelector(".num").textContent = num + " is even";
+    // } else {
+    //   document.querySelector(".num").textContent = num + " is odd";
+    // }
+  </script>
+</html>
