@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "username": "sourav",
+      "age": 15,
+      "id": "1764692327016"
+    },
+    {
+      "username": "sanjay",
+      "age": 15,
+      "id": "1764692336477"
+    },
+    {
+      "username": "abhijith",
+      "age": 15,
+      "id": "1764692348545"
+    }
+  ],
+  "posts": []
+}
