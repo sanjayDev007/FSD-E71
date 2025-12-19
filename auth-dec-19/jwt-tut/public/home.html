@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Home - Session Cookie Auth</title>
+		<style>
+			body{font-family:Segoe UI, Arial;max-width:900px;margin:40px auto;padding:0 20px}
+			header{display:flex;justify-content:space-between;align-items:center}
+			nav a{margin-right:12px}
+			.card{border:1px solid #ddd;padding:18px;border-radius:8px}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>Auth Demo</h1>
+			<nav>
+				<a href="login.html">Login</a>
+				<a href="register.html">Register</a>
+				<a href="profile.html">Profile</a>
+			</nav>
+		</header>
+
+		<main>
+			<section class="card">
+				<h2>Welcome</h2>
+				<p>This small demo app demonstrates registering, logging in and fetching a protected profile using a token returned by the server.</p>
+				<p>Start by creating an account, then log in. The token returned by <code>/login</code> is stored in <code>localStorage</code> and sent as an <code>authorization</code> header when requesting <code>/profile</code>.</p>
+			</section>
+		</main>
+	</body>
+</html>
