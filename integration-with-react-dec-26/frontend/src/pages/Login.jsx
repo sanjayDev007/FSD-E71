@@ -26,7 +26,7 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/login', formData);
+      const response = await axios.post('https://entri.skillassign.com/login', formData);
       login(response.data.token);
       navigate('/home');
     } catch (err) {

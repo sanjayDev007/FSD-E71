@@ -11,7 +11,7 @@ const AdminSecret = () => {
   useEffect(() => {
     const fetchSecretData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/secret', {
+        const response = await axios.get('https://entri.skillassign.com/secret', {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -11,7 +11,7 @@ cd e:\tutorial\FSD-E71\integration-with-react-dec-26\backend
 node app.js
 ```
 
-The backend will start on `http://localhost:3000`
+The backend will start on `https://entri.skillassign.com`
 
 ### 3. Start the Frontend Development Server
 ```powershell

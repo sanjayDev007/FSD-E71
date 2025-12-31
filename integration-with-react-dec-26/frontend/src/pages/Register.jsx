@@ -38,7 +38,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:3000/register', {
+      await axios.post('https://entri.skillassign.com/register', {
         username: formData.username,
         password: formData.password,
         role: formData.role,
