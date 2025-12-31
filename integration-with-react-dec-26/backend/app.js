@@ -80,8 +80,8 @@ app.get('/secret', (req, res) => {
     });
 });
 
-// Catch-all route to serve index.html for SPA routing
-app.get('*', (req, res) => {
+// Catch-all route to serve index.html for SPA routing (Express 5 syntax)
+app.get('/{*splat}', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
