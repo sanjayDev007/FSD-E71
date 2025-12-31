@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -13,7 +14,7 @@ app.use(cors());
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, 'frontend')));
 // MongoDB connection
-mongoose.connect('mongodb://localhost:27017/auth')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/auth')
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.log(err));
 
