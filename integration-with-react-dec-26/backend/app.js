@@ -11,8 +11,8 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-// Serve frontend static files
-app.use(express.static(path.join(__dirname, 'frontend')));
+// Serve frontend dist files from the frontend/dist folder
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/auth')
     .then(() => console.log('MongoDB connected'))
@@ -78,6 +78,11 @@ app.get('/secret', (req, res) => {
         // The secret text sent only to admins
         res.json({ secret: 'THIS_IS_A_TOP_SECRET_FOR_ADMINS_ONLY' });
     });
+});
+
+// Catch-all route to serve index.html for SPA routing
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 // Start server
